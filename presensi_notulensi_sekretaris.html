@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-slate-950 text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presensi Sekretaris - 01GSDK001</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="app.js"></script>
+    <style>
+        body { font-family: sans-serif; background-color: #030712; }
+        .glass-card { background: rgba(15, 23, 42, 0.78); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    </style>
+</head>
+<body class="h-full flex flex-col bg-slate-950 text-slate-100">
+
+    <header class="glass-card border-b border-slate-800 p-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-lg font-extrabold text-cyan-400 cursor-pointer" onclick="navigateTo('index.html')">01GSDK001 - Sekretaris</h1>
+            <button onclick="navigateTo('index.html')" class="text-xs bg-cyan-600 px-3 py-1.5 rounded-xl font-bold">← Beranda</button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl w-full mx-auto px-4 py-6 space-y-6 flex-1">
+        <div class="border-b border-slate-800 pb-4">
+            <h2 class="text-xl font-bold text-cyan-400"><i class="fa-solid fa-clipboard-user mr-2"></i>Presensi Kehadiran Mahasiswa</h2>
+        </div>
+
+        <div class="glass-card p-5 rounded-3xl space-y-4">
+            <div id="attendance-roster-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+        </div>
+    </main>
+
+    <script>
+        function renderAttendanceRoster() {
+            const grid = document.getElementById('attendance-roster-grid');
+            if (!grid) return;
+            grid.innerHTML = (window.studentsList || []).map((s, idx) => `
+                <div class="p-3 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-between text-xs">
+                    <span class="font-bold text-white uppercase truncate">${idx + 1}. ${s}</span>
+                    <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">Hadir</span>
+                </div>
+            `).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAttendanceRoster();
+        });
+    </script>
+</body>
+</html>

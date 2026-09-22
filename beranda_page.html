@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-slate-950 text-slate-100" data-theme="purple" data-bg="nebula">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Beranda - Portal Kelas 01GSDK001</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="app.js"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; }
+        .glass-card { background: rgba(15, 23, 42, 0.78); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .active-tab { background: linear-gradient(135deg, rgba(124, 58, 237, 0.35) 0%, rgba(124, 58, 237, 0.12) 100%) !important; border-bottom: 2px solid #a78bfa !important; }
+    </style>
+</head>
+<body class="h-full flex flex-col bg-slate-950 text-slate-100">
+
+    <div id="toast-container" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[220] flex flex-col gap-2.5 max-w-xs sm:max-w-md w-11/12 pointer-events-none items-center"></div>
+
+    <!-- MANDATORY LOGIN GATE -->
+    <div id="mandatory-login-gate" class="fixed inset-0 z-[180] bg-slate-950/95 backdrop-blur-2xl flex items-center justify-center p-4">
+        <div class="glass-card rounded-3xl border border-purple-500/30 max-w-md w-full p-6 space-y-4">
+            <h2 class="text-xl font-bold text-white text-center">Login Portal Kelas 01GSDK001</h2>
+            <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1">Pilih Nama Anda</label>
+                    <select id="login-user-select" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                        <option value="">Pilih Nama Anda</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Kata Sandi</label>
+                    <input type="password" id="login-pass-input" required placeholder="Default: 1234" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                </div>
+                <button type="submit" class="w-full py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl text-xs">Masuk Ke Website</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 glass-card border-b border-slate-800 bg-slate-950/90">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('index.html')">
+                <div class="w-10 h-10 rounded-xl bg-purple-900 border border-purple-400 flex items-center justify-center text-white font-black text-xs">PGSD</div>
+                <div>
+                    <span class="text-lg font-bold text-white block">01GSDK001</span>
+                    <span class="text-xs text-purple-300 block">PGSD UNPAM REGULER CK</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="admin-panel-btn" onclick="navigateTo('admin.html')" class="hidden px-3 py-1.5 bg-purple-600/30 border border-purple-500 text-purple-300 rounded-xl text-xs font-bold">Panel Admin</button>
+                <button onclick="handleLogout()" class="px-3 py-1.5 bg-rose-600/20 text-rose-300 border border-rose-500/30 rounded-xl text-xs font-bold">Keluar</button>
+            </div>
+        </div>
+        <!-- NAVIGATION LINKS -->
+        <nav class="bg-slate-950 border-t border-slate-800 py-2">
+            <div class="max-w-7xl mx-auto px-4 flex space-x-2 overflow-x-auto text-xs">
+                <button onclick="navigateTo('index.html')" class="px-3 py-1.5 rounded-xl font-bold active-tab text-white">Beranda</button>
+                <button onclick="navigateTo('materi.html')" class="px-3 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white">Materi</button>
+                <button onclick="navigateTo('tugas.html')" class="px-3 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white">Tugas</button>
+                <button onclick="navigateTo('pengumuman.html')" class="px-3 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white">Pengumuman</button>
+                <button onclick="navigateTo('profil.html')" class="px-3 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white">Profil</button>
+                <button onclick="navigateTo('keuangan.html')" class="px-3 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white">Kas</button>
+                <button onclick="navigateTo('sekretaris.html')" class="px-3 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white">Presensi</button>
+                <button onclick="navigateTo('kreator.html')" class="px-3 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white">Kreator</button>
+                <button onclick="navigateTo('dokumentasi.html')" class="px-3 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white">Dokumentasi</button>
+                <button onclick="navigateTo('forum.html')" class="px-3 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white">Forum</button>
+                <button onclick="navigateTo('referensi.html')" class="px-3 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white">Referensi</button>
+                <button onclick="navigateTo('tutorial.html')" class="px-3 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white">Tutorial</button>
+                <button onclick="navigateTo('changelog.html')" class="px-3 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white">Log</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="max-w-7xl w-full mx-auto px-4 py-6 space-y-6 flex-1">
+        <div class="glass-card rounded-3xl p-8 border border-purple-500/30 space-y-4">
+            <h1 class="text-3xl font-black text-white" id="site-hero-title">Kelas 01GSDK001 PGSD UNPAM</h1>
+            <p class="text-sm text-slate-300" id="site-hero-subtitle">Website Resmi PGSD Reguler CK - Terintegrasi Real-Time Cloud 24 Jam.</p>
+            <div class="flex gap-3">
+                <button onclick="navigateTo('materi.html')" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold rounded-xl">Lihat Materi Perkuliahan</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="glass-card p-5 rounded-2xl space-y-1">
+                <span class="text-slate-400 text-xs">Total Mahasiswa</span>
+                <div class="text-2xl font-black text-white">42</div>
+            </div>
+            <div class="glass-card p-5 rounded-2xl space-y-1">
+                <span class="text-slate-400 text-xs">Mata Kuliah</span>
+                <div class="text-2xl font-black text-white">10</div>
+            </div>
+            <div class="glass-card p-5 rounded-2xl space-y-1">
+                <span class="text-slate-400 text-xs">Saldo Kas</span>
+                <div class="text-2xl font-black text-emerald-400" id="home-kas-total">Rp 0</div>
+            </div>
+            <div class="glass-card p-5 rounded-2xl space-y-1">
+                <span class="text-slate-400 text-xs">Status Kuliah</span>
+                <div class="text-2xl font-black text-purple-400">Reguler CK</div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-800 py-4 text-center text-xs text-slate-500">
+        Website Resmi Kelas 01GSDK001 PGSD UNPAM
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.siteConfig) {
+                document.getElementById('site-hero-title').textContent = window.siteConfig.heroTitle;
+                document.getElementById('site-hero-subtitle').textContent = window.siteConfig.heroSubtitle;
+            }
+        });
+    </script>
+</body>
+</html>

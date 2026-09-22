@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-slate-950 text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papan Pengumuman - 01GSDK001</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="app.js"></script>
+    <style>
+        body { font-family: sans-serif; background-color: #030712; }
+        .glass-card { background: rgba(15, 23, 42, 0.78); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    </style>
+</head>
+<body class="h-full flex flex-col bg-slate-950 text-slate-100">
+
+    <header class="glass-card border-b border-slate-800 p-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-lg font-extrabold text-white cursor-pointer" onclick="navigateTo('index.html')">01GSDK001 - PGSD</h1>
+            <button onclick="navigateTo('index.html')" class="text-xs bg-pink-600 px-3 py-1.5 rounded-xl font-bold">← Beranda</button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl w-full mx-auto px-4 py-6 space-y-6 flex-1">
+        <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+            <h2 class="text-xl font-bold text-pink-400"><i class="fa-solid fa-bullhorn mr-2"></i>Papan Pengumuman Kelas</h2>
+            <button onclick="openModal('add-announcement-modal')" class="px-3.5 py-2 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-xs">+ Buat Pengumuman</button>
+        </div>
+
+        <div id="all-announcements-list" class="space-y-4"></div>
+    </main>
+
+    <!-- MODAL PENGUMUMAN -->
+    <div id="add-announcement-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 flex items-center justify-center p-4">
+        <div class="glass-card rounded-3xl p-6 max-w-md w-full space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                <h3 class="font-bold text-pink-400">Buat Pengumuman</h3>
+                <button onclick="closeModal('add-announcement-modal')" class="text-slate-400">✕</button>
+            </div>
+            <form onsubmit="handleSaveAnnouncement(event)" class="space-y-3">
+                <input type="text" id="ann-title-input" required placeholder="Judul Pengumuman" class="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-xs text-white">
+                <textarea id="ann-content-input" rows="3" required placeholder="Isi Pengumuman" class="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-xs text-white"></textarea>
+                <button type="submit" class="w-full py-2.5 bg-pink-600 font-bold rounded-xl text-xs">Terbitkan</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function renderAnnouncements() {
+            const container = document.getElementById('all-announcements-list');
+            if (!container) return;
+            container.innerHTML = (window.announcements || []).map(ann => `
+                <div class="glass-card p-5 rounded-2xl space-y-2">
+                    <div class="flex justify-between text-xs">
+                        <strong class="text-pink-400">${ann.title}</strong>
+                        <span class="text-slate-500">${ann.date}</span>
+                    </div>
+                    <p class="text-xs text-slate-300">${ann.content}</p>
+                </div>
+            `).join('');
+        }
+
+        function handleSaveAnnouncement(e) {
+            e.preventDefault();
+            const title = document.getElementById('ann-title-input').value;
+            const content = document.getElementById('ann-content-input').value;
+            window.announcements.unshift({ id: Date.now().toString(), title, date: 'Hari Ini', content });
+            window.saveDataLocal();
+            renderAnnouncements();
+            closeModal('add-announcement-modal');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAnnouncements();
+        });
+    </script>
+</body>
+</html>
