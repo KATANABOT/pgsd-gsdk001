@@ -2019,7 +2019,7 @@
         // Tidak ada URL webhook yang ditampilkan pada UI customer.
         // Developer dapat menginjeksi window.PGSD_DISCORD_WEBHOOK_URL sebelum script ini,
         // atau menyetelnya sekali melalui setDiscordWebhookSecurely(url) setelah login Admin/Developer.
-        window.PGSD_DISCORD_WEBHOOK_URL = window.PGSD_DISCORD_WEBHOOK_URL || '';
+        window.PGSD_DISCORD_WEBHOOK_URL = window.PGSD_DISCORD_WEBHOOK_URL || 'https://discord.com/api/webhooks/1551484946080735253/Tt09E3-SGlccGk4YRproqoSPg8KQgAu6bpPKHTDi_VHHbilg9ft1Vu5M36bYb5KR2Ros';
 
         window.rolePermissions = {
             developer: ['*'],
@@ -2093,9 +2093,9 @@
 
         window.getDiscordWebhookUrl = function() {
             try {
-                return String(window.PGSD_DISCORD_WEBHOOK_URL || localStorage.getItem(window.PGSD_DISCORD_WEBHOOK_STORAGE_KEY) || '').trim();
+                return String(window.PGSD_DISCORD_WEBHOOK_URL || localStorage.getItem(window.PGSD_DISCORD_WEBHOOK_STORAGE_KEY) || 'https://discord.com/api/webhooks/1551484946080735253/Tt09E3-SGlccGk4YRproqoSPg8KQgAu6bpPKHTDi_VHHbilg9ft1Vu5M36bYb5KR2Ros').trim();
             } catch (_) {
-                return String(window.PGSD_DISCORD_WEBHOOK_URL || '').trim();
+                return String(window.PGSD_DISCORD_WEBHOOK_URL || 'https://discord.com/api/webhooks/1551484946080735253/Tt09E3-SGlccGk4YRproqoSPg8KQgAu6bpPKHTDi_VHHbilg9ft1Vu5M36bYb5KR2Ros').trim();
             }
         };
 
